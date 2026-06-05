@@ -137,7 +137,7 @@ class MultiLogWriter extends LogWriter {
   /// Appends [writer] to the chain. Useful when a writer can only be
   /// constructed after the chain has already been built (e.g. a writer
   /// that needs a database session that doesn't exist yet at startup).
-  void add(LogWriter writer) => [..._writers, writer];
+  void add(LogWriter writer) => _writers = [..._writers, writer];
 
   /// Removes [writer] from the chain, if present. Counterpart to [add];
   /// used when the chain needs to be reconfigured after construction
