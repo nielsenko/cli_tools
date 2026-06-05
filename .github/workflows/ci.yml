@@ -42,8 +42,6 @@ jobs:
         dart: [3.6, 3.12]
         package: [cli_tools, config, serverpod_logging]
         platform: [ubuntu-latest]
-        exclude:
-          - package: serverpod_logging
         include:
           - package: cli_tools
             platform: windows-latest
@@ -51,9 +49,6 @@ jobs:
           - package: cli_tools
             platform: macos-latest
             dart: 3.6
-          - package: serverpod_logging
-            dart: 3.10.3
-            platform: ubuntu-latest
     runs-on: ${{ matrix.platform }}
     defaults:
       run:
