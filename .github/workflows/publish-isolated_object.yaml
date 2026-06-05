@@ -1,0 +1,16 @@
+name: Publish isolated_object package
+
+on:
+    push:
+        tags:
+            # Matches tags like isolated_object-v1.2.3 and isolated_object-v1.2.3-pre.1
+            - 'isolated_object-v[0-9]+.[0-9]+.[0-9]+'
+            - 'isolated_object-v[0-9]+.[0-9]+.[0-9]+-*'
+
+jobs:
+    publish:
+        permissions:
+            id-token: write
+        uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+        with:
+          working-directory: packages/isolated_object

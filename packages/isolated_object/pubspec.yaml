@@ -1,5 +1,8 @@
-name: serverpod_logging
-description: Shared serverpod logging utilities.
+name: isolated_object
+description: >-
+  Wraps an object in a dedicated isolate and forwards method calls to it, so
+  timer- or event-loop-driven work (e.g. progress spinners) keeps running even
+  when the calling isolate's event loop is blocked. Dependency-free.
 version: 0.1.0
 repository: https://github.com/serverpod/serverpod
 homepage: https://serverpod.dev
@@ -9,10 +12,6 @@ environment:
   sdk: ^3.6.0
 
 resolution: workspace
-
-dependencies:
-  isolated_object: ^0.1.0
-  meta: ^1.15.0
 
 dev_dependencies:
   serverpod_lints: '>=2.7.0'
