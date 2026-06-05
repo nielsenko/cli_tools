@@ -15,7 +15,12 @@ jobs:
       fail-fast: false
       matrix:
         dart: [3.6, 3.12]
-        package: [cli_tools, config, isolated_object, serverpod_logging]
+        package:
+          - cli_tools
+          - config
+          - isolated_object
+          - serverpod_logging
+          - serverpod_logging_cli
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -35,7 +40,12 @@ jobs:
       fail-fast: false
       matrix:
         dart: [3.6, 3.12]
-        package: [cli_tools, config, isolated_object, serverpod_logging]
+        package:
+          - cli_tools
+          - config
+          - isolated_object
+          - serverpod_logging
+          - serverpod_logging_cli
         platform: [ubuntu-latest]
         include:
           - package: cli_tools
