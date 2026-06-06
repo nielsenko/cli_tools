@@ -1,4 +1,5 @@
 export 'src/global_log.dart';
+export 'src/isolated_log_writer.dart';
 export 'src/log.dart';
 export 'src/log_types.dart';
 export 'src/spinner_log_writer.dart';
