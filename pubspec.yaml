@@ -10,6 +10,7 @@ workspace:
   - packages/cli_tools
   - packages/serverpod_logging
   - packages/isolated_object
+  - packages/serverpod_logging_cli
 
 topics:
   - cli
