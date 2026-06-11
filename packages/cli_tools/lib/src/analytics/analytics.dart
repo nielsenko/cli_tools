@@ -21,10 +21,19 @@ abstract class Analytics {
     final Map<String, dynamic> properties = const {},
   }) {
     late final Future<void> pendingTrack;
-    pendingTrack = sendEvent(event: event, properties: properties)
-        .catchError((final _) {})
+    pendingTrack = _quietSendEvent(event: event, properties: properties)
         .whenComplete(() => _pendingTracks.remove(pendingTrack));
     _pendingTracks.add(pendingTrack);
+  }
+
+  /// Sends an event, swallowing any errors.
+  Future<void> _quietSendEvent({
+    required final String event,
+    required final Map<String, dynamic> properties,
+  }) async {
+    try {
+      await sendEvent(event: event, properties: properties);
+    } catch (_) {}
   }
 
   /// Send an event to the analytics service.

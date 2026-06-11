@@ -49,6 +49,26 @@ void main() {
   );
 
   test(
+    'Given an analytics implementation whose sendEvent returns a future with a non-void reified type, '
+    'when the event send fails, '
+    'then the failure is ignored and flush completes.',
+    () async {
+      final analytics = NonVoidFutureAnalytics();
+
+      analytics.track(event: 'test');
+
+      final flush = expectLater(analytics.flush(), completes);
+      await flushEventQueue();
+
+      analytics.completers.single.completeError(
+        StateError('Failed to send event.'),
+      );
+
+      await expectLater(flush, completes);
+    },
+  );
+
+  test(
     'Given compound analytics with a provider that fails to flush, '
     'when flushing the compound analytics, '
     'then all providers are flushed and the failure is ignored.',
@@ -76,6 +96,26 @@ class PendingAnalytics extends Analytics {
     final completer = Completer<void>();
     completers.add(completer);
     return completer.future;
+  }
+}
+
+/// Returns futures from [sendEvent] whose reified type is not `Future<void>`.
+///
+/// This an example of how NOT to do it. In general don't try to be smart and
+/// skip the async on a method returning `Future<void>`. This is just one pitfall
+/// of many.
+class NonVoidFutureAnalytics extends Analytics {
+  final completers = <Completer<String>>[];
+
+  @override
+  Future<void> sendEvent /* no async */ ({
+    required final String event,
+    final Map<String, dynamic> properties = const {},
+  }) {
+    // note the mismatch Future<void> vs Future<String>
+    final completer = Completer<String>();
+    completers.add(completer);
+    return completer.future; // no await
   }
 }
 
