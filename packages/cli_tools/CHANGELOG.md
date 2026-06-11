@@ -1,3 +1,7 @@
+## 0.13.2
+
+- **FIX**(cli_tools): Prevent analytics send failures from crashing the host process. ([#125](https://github.com/serverpod/cli_tools/pull/125)). ([2dcce5b5](https://github.com/serverpod/cli_tools/commit/2dcce5b588caa3df8db8943a48de2036ddbc836e))
+
 ## 0.13.1
 
  - **FEAT**(cli_tools): Make progress display more configurable ([#113](https://github.com/serverpod/cli_tools/issues/113)). ([8df886e5](https://github.com/serverpod/cli_tools/commit/8df886e59db5f59bc0ab8780803e1a977adf4017))
