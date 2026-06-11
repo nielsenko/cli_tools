@@ -39,7 +39,7 @@ class PostHogAnalytics extends Analytics {
   Future<void> sendEvent({
     required final String event,
     final Map<String, dynamic> properties = const {},
-  }) {
+  }) async {
     final eventData = {
       'api_key': _projectApiKey,
       'event': event,
@@ -54,7 +54,7 @@ class PostHogAnalytics extends Analytics {
       },
     };
 
-    return http
+    await http
         .post(
           _endpoint,
           headers: {'Content-Type': 'application/json'},

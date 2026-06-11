@@ -55,7 +55,7 @@ class MixPanelAnalytics extends Analytics {
   Future<void> sendEvent({
     required final String event,
     final Map<String, dynamic> properties = const {},
-  }) {
+  }) async {
     final payload = jsonEncode({
       'event': event,
       'properties': {
@@ -68,7 +68,7 @@ class MixPanelAnalytics extends Analytics {
       },
     });
 
-    return http.post(
+    await http.post(
       _endpoint,
       body: 'data=$payload',
       headers: {
